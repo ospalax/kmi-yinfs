@@ -1,3 +1,5 @@
-from django.shortcuts import render
+from django.http import HttpResponse
 
-# Create your views here.
+
+def index(request):
+    return HttpResponse("<h1>Hello, you are at my landing page.</h1>")
