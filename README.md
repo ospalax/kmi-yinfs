@@ -7,6 +7,7 @@ Technical stack:
 - python3
 - django
 - PostgreSQL
+- POSIX shell
 - HTML5/CSS3
 - Javascript
 
