@@ -9,21 +9,22 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgrespw
-      POSTGRES_DB: postgres
       PGDATA: /var/lib/postgresql/data/pgdata
     volumes:
       - postgres_data:/var/lib/postgresql/data
   web:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    #command: python manage.py runserver 0.0.0.0:8000
     environment:
       #DJANGO_SETTINGS_MODULE: "kmi-yinfs.settings"
-      PG_USER: postgres
-      PG_PASSWORD: postgrespw
+      PG_ADMIN_USER: postgres
+      PG_ADMIN_PASSWORD: postgrespw
+      PG_DB_USER: ppadmin
+      PG_DB_PASSWORD: ppadminpw
       PG_HOST: db
       PG_PORT: 5432
-      PG_DB_NAME: postgres
-      #PG_DB_ARGS: TEMPLATE template0 ENCODING 'UTF8' LC_COLLATE 'cs_CZ.UTF-8' LC_CTYPE 'cs_CZ.UTF-8'
+      PG_DB_NAME: portfolio
+      PG_DB_ARGS: TEMPLATE template0 ENCODING 'UTF8' LC_COLLATE 'cs_CZ.UTF-8' LC_CTYPE 'cs_CZ.UTF-8'
     volumes:
       - ./app/:/app/
     depends_on:
