@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en-US">
+
+<head>
+  <meta charset="utf-8">
+  <title> Personal Portfolio </title>
+</head>
+
+<body>
+  <h1> Personal Portfolio </h1>
+
+{% if menu_list %}
+    <ul>
+    {% for menu_item in menu_list %}
+        <li>{{ menu_item.menu_item }}</li>
+    {% endfor %}
+    </ul>
+{% endif %}
+
+</body>
+
+</html>
