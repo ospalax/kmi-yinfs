@@ -8,7 +8,7 @@ services:
     image: postgres:10-alpine
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgrespw
+      POSTGRES_PASSWORD: postgres_123
       PGDATA: /var/lib/postgresql/data/pgdata
     volumes:
       - postgres_data:/var/lib/postgresql/data
@@ -17,10 +17,13 @@ services:
     #command: python manage.py runserver 0.0.0.0:8000
     environment:
       #DJANGO_SETTINGS_MODULE: "kmi-yinfs.settings"
+      ADMIN_USERNAME: admin
+      ADMIN_PASSWORD: admin_123
+      ADMIN_EMAIL: admin@localhost
       PG_ADMIN_USER: postgres
-      PG_ADMIN_PASSWORD: postgrespw
+      PG_ADMIN_PASSWORD: postgres_123
       PG_DB_USER: ppadmin
-      PG_DB_PASSWORD: ppadminpw
+      PG_DB_PASSWORD: ppadmin_123
       PG_HOST: db
       PG_PORT: 5432
       PG_DB_NAME: portfolio
