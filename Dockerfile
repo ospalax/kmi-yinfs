@@ -11,10 +11,32 @@ RUN apk update && \
  apk add --no-cache \
     postgresql-libs \
     postgresql-client \
+    libpng \
+    freetype \
+    libjpeg-turbo \
+    lcms2 \
+    openjpeg \
+    tiff \
+    libwebp \
+    zlib \
     && \
- apk add --no-cache --virtual .build-deps gcc musl-dev postgresql-dev && \
+ apk add --no-cache --virtual .build-deps \
+    gcc \
+    musl-dev \
+    postgresql-dev \
+    libpng-dev \
+    freetype-dev \
+    libjpeg-turbo-dev \
+    lcms2-dev \
+    openjpeg-dev \
+    tiff-dev \
+    libwebp-dev \
+    zlib-dev \
+    && \
  python3 -m pip install -r requirements.txt --no-cache-dir && \
  apk --purge del .build-deps
+
+RUN mkdir -p /var/www/data
 
 # entrypoint
 COPY entrypoint.sh /

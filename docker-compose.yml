@@ -17,6 +17,7 @@ services:
     #command: python manage.py runserver 0.0.0.0:8000
     environment:
       #DJANGO_SETTINGS_MODULE: "kmi-yinfs.settings"
+      #UPLOAD_DIR
       TIMEZONE: "Europe/Prague"
       LANGUAGE: "en-us"
       ADMIN_USERNAME: admin

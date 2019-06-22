@@ -130,3 +130,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# image upload root
+MEDIA_ROOT = os.getenv('UPLOAD_DIR', '/var/www/data/')
+
