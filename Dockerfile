@@ -44,7 +44,7 @@ RUN mkdir -p /var/www/data
 # system option (-S), but it is annoying to fix the ownership every time I do
 # "makemigrations" during the development...
 RUN addgroup -S -g 1000 portfolio && \
-    adduser -S -u 1000 -G portfolio -h /app -HD -s /bin/sh portfolio
+    adduser -S -u 1000 -G portfolio -h / -HD -s /bin/sh portfolio
 RUN chown portfolio:portfolio /var/www/data
 
 # entrypoint
