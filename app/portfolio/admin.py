@@ -1,6 +1,7 @@
 from django.contrib import admin
 
 from .models import Menu
+from .models import Content
 from .models import Person
 from .models import Email
 from .models import Website
@@ -13,6 +14,7 @@ from .models import Skill
 from .models import Picture
 
 admin.site.register(Menu)
+admin.site.register(Content)
 admin.site.register(Person)
 admin.site.register(Email)
 admin.site.register(Website)

@@ -3,15 +3,15 @@ from .validators import validate_skill_level
 
 class Menu(models.Model):
     menu_item = models.CharField(max_length=100)
-    order = models.IntegerField('Menu item order', default=0)
+    order = models.PositiveSmallIntegerField('Menu item order', default=0)
     def __str__(self):
         return self.menu_item
 
 class Content(models.Model):
     menu_item = models.ForeignKey(Menu, on_delete=models.CASCADE)
-    markup = models.TextField()
+    menu_content = models.TextField()
     def __str__(self):
-        return self.menu_item + '_Content'
+        return 'Content for ' + self.menu_item
 
 class Person(models.Model):
     first_name = models.CharField(max_length=100)
@@ -51,6 +51,7 @@ class Education(models.Model):
     description = models.CharField(max_length=500)
     start_date = models.DateField('Education starting date')
     end_date = models.DateField('Education ending date', blank=True)
+    website = models.URLField(blank=True)
     def __str__(self):
         return self.institute_name + ' (' + self.institute_type + ')'
 
@@ -61,6 +62,7 @@ class WorkExperience(models.Model):
     job_description = models.CharField(max_length=500)
     start_date = models.DateField('Job start date')
     end_date = models.DateField('Job end date', blank=True)
+    website = models.URLField(blank=True)
     def __str__(self):
         return self.job_title + ' (' + self.company_name + ')'
 
@@ -69,6 +71,7 @@ class Publication(models.Model):
     title = models.CharField('Publication title', max_length=100)
     description = models.CharField('Publication summary', max_length=500)
     release_date = models.DateField('Publication date')
+    website = models.URLField(blank=True)
     def __str__(self):
         return self.title + ' (' + self.release_date + ')'
 
