@@ -97,4 +97,6 @@ class Picture(models.Model):
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
     # file will be saved to MEDIA_ROOT/gallery/<year>/
     upload = models.ImageField(upload_to='gallery/%Y/')
+    def __str__(self):
+        return self.upload.path
 

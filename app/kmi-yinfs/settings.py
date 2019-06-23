@@ -133,4 +133,5 @@ STATIC_URL = '/static/'
 
 # image upload root
 MEDIA_ROOT = os.getenv('UPLOAD_DIR', '/var/www/data/')
+MEDIA_URL = MEDIA_ROOT
 
