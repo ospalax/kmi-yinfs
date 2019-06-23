@@ -38,6 +38,15 @@ RUN apk update && \
 
 RUN mkdir -p /var/www/data
 
+# setup user to run the service
+#
+# I am aware that setting the GID/UID to 1000 beats the purpose of using the
+# system option (-S), but it is annoying to fix the ownership every time I do
+# "makemigrations" during the development...
+RUN addgroup -S -g 1000 portfolio && \
+    adduser -S -u 1000 -G portfolio -h /app -HD -s /bin/sh portfolio
+RUN chown portfolio:portfolio /var/www/data
+
 # entrypoint
 COPY entrypoint.sh /
 RUN chmod +x /entrypoint.sh
@@ -46,4 +55,4 @@ RUN chmod +x /cmd.sh
 
 EXPOSE 8000
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["/cmd.sh"]
+#CMD ["/cmd.sh"]

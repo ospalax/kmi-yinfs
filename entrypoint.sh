@@ -119,7 +119,7 @@ fi
 
 # run default app or command
 if [ -z "$1" ] ; then
-    exec /cmd.sh
+    exec su portfolio -c /cmd.sh
 else
     exec "$@"
 fi

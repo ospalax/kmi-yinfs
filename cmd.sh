@@ -4,6 +4,8 @@ set -e
 
 PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
+echo "APP: Running as user: $(id)"
+
 # migrate db and start django
 cd /app
 
@@ -14,7 +16,7 @@ if [ -n "$ADMIN_USERNAME" ] && \
     [ -n "$ADMIN_PASSWORD" ] && \
     [ -n "$ADMIN_EMAIL" ] ;
 then
-    echo "Create superuser: ${ADMIN_USERNAME}"
+    echo "APP: Create superuser: ${ADMIN_USERNAME}"
     # if it not already exists...
     if ! python manage.py shell -c "from django.contrib.auth.models import User; \
         users = list(User.objects.values('username')); \
