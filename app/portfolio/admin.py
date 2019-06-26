@@ -12,6 +12,7 @@ from .models import Publication
 from .models import Project
 from .models import Skill
 from .models import Picture
+from .models import Portrait
 
 admin.site.register(Menu)
 admin.site.register(Content)
@@ -25,3 +26,4 @@ admin.site.register(Publication)
 admin.site.register(Project)
 admin.site.register(Skill)
 admin.site.register(Picture)
+admin.site.register(Portrait)

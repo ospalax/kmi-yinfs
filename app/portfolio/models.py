@@ -1,17 +1,22 @@
 from django.db import models
 from .validators import validate_skill_level
 
+
 class Menu(models.Model):
     menu_item = models.CharField(max_length=100)
     order = models.PositiveSmallIntegerField('Menu item order', default=0)
+
     def __str__(self):
         return self.menu_item
+
 
 class Content(models.Model):
     menu_item = models.ForeignKey(Menu, on_delete=models.CASCADE)
     menu_content = models.TextField()
+
     def __str__(self):
         return 'Content for ' + self.menu_item
+
 
 class Person(models.Model):
     first_name = models.CharField(max_length=100)
@@ -22,27 +27,35 @@ class Person(models.Model):
     default_email = models.EmailField()
     default_website = models.URLField('My website', blank=True)
     default_phone = models.CharField(max_length=60, blank=True)
+
     def __str__(self):
         return self.first_name + ' ' + self.last_name + \
             ' (' + self.default_email + ')'
 
+
 class Email(models.Model):
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
     email = models.EmailField()
+
     def __str__(self):
         return self.email
+
 
 class Website(models.Model):
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
     website = models.URLField()
+
     def __str__(self):
         return self.website
+
 
 class Phone(models.Model):
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
     phone = models.CharField(max_length=60)
+
     def __str__(self):
         return self.phone
+
 
 class Education(models.Model):
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
@@ -50,10 +63,12 @@ class Education(models.Model):
     institute_type = models.CharField(max_length=100)
     description = models.CharField(max_length=500)
     start_date = models.DateField('Education starting date')
-    end_date = models.DateField('Education ending date', blank=True)
+    end_date = models.DateField('Education ending date', blank=True, null=True)
     website = models.URLField(blank=True)
+
     def __str__(self):
         return self.institute_name + ' (' + self.institute_type + ')'
+
 
 class WorkExperience(models.Model):
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
@@ -61,10 +76,12 @@ class WorkExperience(models.Model):
     job_title = models.CharField(max_length=100)
     job_description = models.CharField(max_length=500)
     start_date = models.DateField('Job start date')
-    end_date = models.DateField('Job end date', blank=True)
+    end_date = models.DateField('Job end date', blank=True, null=True)
     website = models.URLField(blank=True)
+
     def __str__(self):
         return self.job_title + ' (' + self.company_name + ')'
+
 
 class Publication(models.Model):
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
@@ -72,16 +89,20 @@ class Publication(models.Model):
     description = models.CharField('Publication summary', max_length=500)
     release_date = models.DateField('Publication date')
     website = models.URLField(blank=True)
+
     def __str__(self):
-        return self.title + ' (' + self.release_date + ')'
+        return self.title + ' (' + self.release_date.strftime("%Y-%m-%d") + ')'
+
 
 class Project(models.Model):
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
     project_name = models.CharField(max_length=100)
     project_description = models.CharField(max_length=500)
     website = models.URLField(blank=True)
+
     def __str__(self):
         return self.project_name
+
 
 class Skill(models.Model):
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
@@ -90,13 +111,26 @@ class Skill(models.Model):
     skill_level = models.PositiveSmallIntegerField(
         validators=[validate_skill_level])
     website = models.URLField(blank=True)
+
     def __str__(self):
         return self.skill_name + ' (' + self.skill_category + ')'
 
+
 class Picture(models.Model):
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
+    title = models.CharField(max_length=500)
     # file will be saved to MEDIA_ROOT/gallery/<year>/
     upload = models.ImageField(upload_to='gallery/%Y/')
+
     def __str__(self):
         return self.upload.path
 
+
+class Portrait(models.Model):
+    person = models.ForeignKey(Person, on_delete=models.CASCADE)
+    title = models.CharField(max_length=500)
+    # file will be saved to MEDIA_ROOT/portrait/
+    upload = models.ImageField(upload_to='portrait/')
+
+    def __str__(self):
+        return self.upload.path
