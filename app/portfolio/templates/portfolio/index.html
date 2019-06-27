@@ -62,7 +62,13 @@
     <section id="{{ menu_item.menu_item|slugify }}">
       <h2>{{ menu_item.menu_item }}</h2>
 
-      {% if menu_item.menu_item|slugify == 'education' and education %}
+      {% if menu_item.menu_item|slugify == 'about' and person %}
+      <!-- about me -->
+      <p>
+        {{ person.0.about_me }}
+      </p>
+
+      {% elif menu_item.menu_item|slugify == 'education' and education %}
       <!-- education -->
       {% for school in education %}
         <h3>{{ school.institute_name }}</h3>
@@ -96,7 +102,9 @@
       {% elif menu_item.menu_item|slugify == 'gallery' and pictures %}
       <!-- gallery -->
         {% for img in pictures %}
-        <img src="{{ img.upload.url }}" height="{{ img.height }}" width="{{ img.width }}" alt="{{ img.title }}" title="{{ img.title }}" />
+        <div class="picture">
+          <img src="{{ img.upload.url }}" height="{{ img.height }}" width="{{ img.width }}" alt="{{ img.title }}" title="{{ img.title }}" />
+        </div>
         {% endfor%}
 
       {% endif %}
