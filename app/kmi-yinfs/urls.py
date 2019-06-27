@@ -29,3 +29,6 @@ urlpatterns = [
 
 # serve uploaded images even from admin interface
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# add static files (css, js, img etc.)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
