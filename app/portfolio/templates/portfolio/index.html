@@ -12,7 +12,7 @@
   <header role="banner">
     <h1> Personal Portfolio </h1>
     <nav>
-      <ul>
+      <ul title="Site navigation">
       {% if person %}
         {% if menu_list %}
         <li>
@@ -45,7 +45,7 @@
 <!-- navigation menu -->
 {% if menu_list %}
   <nav role="navigation">
-    <ul>
+    <ul title="Content navigation">
     {% for menu_item in menu_list %}
         <li>
           <a href="#{{ menu_item.menu_item|slugify }}">{{ menu_item.menu_item }}</a>
@@ -56,7 +56,7 @@
 {% endif %}
 
 <!-- main content -->
-  <article>
+  <article role="main">
   {% if menu_list %}
     {% for menu_item in menu_list %}
     <section id="{{ menu_item.menu_item|slugify }}">
@@ -64,11 +64,26 @@
 
       {% if menu_item.menu_item|slugify == 'education' and education %}
       <!-- education -->
-      <p>education</p>
+      {% for school in education %}
+        <h3>{{ school.institute_name }}</h3>
+        <p>
+          {{ school.institute_type }}
+        </p>
+        <p>
+          {{ school.description }}
+        </p>
+        <p>
+          {{ school.start_date }}-{{ school.end_date }}
+        </p>
+      {% endfor %}
 
       {% elif menu_item.menu_item|slugify == 'experience' and experience %}
       <!-- jobs -->
       <p>work</p>
+
+      {% elif menu_item.menu_item|slugify == 'skills' and skills %}
+      <!-- skills -->
+      <p>skills</p>
 
       {% elif menu_item.menu_item|slugify == 'publications' and publications %}
       <!-- publications -->
@@ -81,7 +96,7 @@
       {% elif menu_item.menu_item|slugify == 'gallery' and pictures %}
       <!-- gallery -->
         {% for img in pictures %}
-        <img src="{{ img.upload.url }}" title="{{ img.title }}" />
+        <img src="{{ img.upload.url }}" height="{{ img.height }}" width="{{ img.width }}" alt="{{ img.title }}" title="{{ img.title }}" />
         {% endfor%}
 
       {% endif %}
@@ -93,21 +108,23 @@
         <h4>{{ person.0.titles_before_name }} {{ person.0.first_name }} {{ person.0.last_name }} {{ person.0.titles_after_name }}</h4>
 
         <!-- email -->
-        <p>
-          Email: <a href="mailto:{{ person.0.default_email }}">{{ person.0.default_email }}</a>
-        </p>
-        {% if emails %}
-        <p>
-          Other emails:
-        </p>
-        <ul>
-          {% for email in emails %}
-          <li>
-            <a href="mailto:{{ email.email }}">{{ email.email }}</a>
-          </li>
-          {% endfor %}
-        </ul>
-        {% endif %}
+        <address>
+          <p>
+            Email: <a href="mailto:{{ person.0.default_email }}">{{ person.0.default_email }}</a>
+          </p>
+          {% if emails %}
+          <p>
+            Other emails:
+          </p>
+          <ul>
+            {% for email in emails %}
+            <li>
+              <a href="mailto:{{ email.email }}">{{ email.email }}</a>
+            </li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </address>
 
         <!-- website -->
         {% if person.0.default_website %}

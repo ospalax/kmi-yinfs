@@ -120,7 +120,18 @@ class Picture(models.Model):
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
     title = models.CharField(max_length=500)
     # file will be saved to MEDIA_ROOT/gallery/<year>/
-    upload = models.ImageField(upload_to='gallery/%Y/')
+    upload = models.ImageField(upload_to='gallery/%Y/',
+                               height_field='height',
+                               width_field='width'
+                               )
+    height = models.PositiveIntegerField(null=True,
+                                         blank=True,
+                                         editable=False,
+                                         default="100")
+    width = models.PositiveIntegerField(null=True,
+                                         blank=True,
+                                         editable=False,
+                                         default="100")
 
     def __str__(self):
         return self.upload.path
@@ -130,7 +141,18 @@ class Portrait(models.Model):
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
     title = models.CharField(max_length=500)
     # file will be saved to MEDIA_ROOT/portrait/
-    upload = models.ImageField(upload_to='portrait/')
+    upload = models.ImageField(upload_to='portrait/',
+                               height_field='height',
+                               width_field='width'
+                               )
+    height = models.PositiveIntegerField(null=True,
+                                         blank=True,
+                                         editable=False,
+                                         default="100")
+    width = models.PositiveIntegerField(null=True,
+                                         blank=True,
+                                         editable=False,
+                                         default="100")
 
     def __str__(self):
         return self.upload.path
