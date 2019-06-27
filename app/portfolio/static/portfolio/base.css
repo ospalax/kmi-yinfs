@@ -1,6 +1,49 @@
 @charset "UTF-8";
 
+body {
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+div#header {
+    background: #417690;
+    width: 100%;
+    position: relative;
+    padding: 0;
+}
+
+@media only screen and (min-width: 640px) {
+    div#navigation {
+        width: 30%;
+        float: left;
+    }
+
+    article {
+        width: 70%;
+        float: right;
+    }
+}
+
 header {
     color: #ffc;
     background: #417690;
+    padding: 10px;
+}
+
+header a:link {
+    color: #ffc;
+}
+
+header a:visited {
+    color: red;
+}
+
+h2, h3 {
+    color: #417690;
+}
+
+time {
+    font-weight: bolder;
+    font-style: italic;
 }
